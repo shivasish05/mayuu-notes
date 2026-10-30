@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>a little hello</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6e9;--b1:#ffe0d2;--b2:#e6dcfb;--b3:#d8f2e5;--ink:#5a4a5e;--soft:#8c7a8f;--card:#fffdf8;--line:#f0e2d0;--peach:#ffd6c4;--lav:#dccff7;--mint:#cdeedd;--btnink:#4a3a50;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2b2540;--b1:#4a3358;--b2:#34305f;--b3:#2d4552;--ink:#fff1e6;--soft:#c9b9d6;--card:#3a3254;--line:#4b4268;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2b2540;--b1:#4a3358;--b2:#34305f;--b3:#2d4552;--ink:#fff1e6;--soft:#c9b9d6;--card:#3a3254;--line:#4b4268;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{min-height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Quicksand","Trebuchet MS",system-ui,sans-serif;font-weight:500;font-size:17px;line-height:1.5;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 12% 8%,var(--b1),transparent 45%),radial-gradient(circle at 92% 22%,var(--b2),transparent 42%),radial-gradient(circle at 70% 98%,var(--b3),transparent 48%)}
+main{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:18px 20px 60px;text-align:center;max-width:440px;margin:0 auto}
+h1{font-size:clamp(1.8rem,7.5vw,2.4rem);font-weight:700;margin:0;line-height:1.15}
+.sub{color:var(--soft);margin:0;max-width:30ch}
+.tiny{color:var(--soft);font-size:.88rem;margin:0}
+.rise{opacity:0;animation:rise .9s cubic-bezier(.2,.9,.3,1.15) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:none}}
+#bub{min-height:30px;font-weight:700;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:99px;padding:3px 14px;opacity:0;transition:opacity .25s}
+#bub.on{opacity:1}
+#char{width:min(180px,46vw);cursor:pointer;touch-action:manipulation;outline-offset:6px;animation:bob 4s ease-in-out infinite;display:block}
+@keyframes bob{50%{transform:translateY(-7px)}}
+.wave{transform-origin:116px 96px;animation:wave 1.6s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:rotate(-8deg)}30%{transform:rotate(-38deg)}60%{transform:rotate(6deg)}}
+#char.hop{animation:hop .5s ease}
+@keyframes hop{40%{transform:translateY(-22px) scale(1.04,.96)}}
+#char.sq{animation:none;transform:scale(1.1,.9)}
+.env{position:relative;width:200px;height:128px;margin:10px auto 2px;cursor:pointer;border:0;background:none;padding:0;animation:pulse 3s ease-in-out infinite;perspective:600px}
+@keyframes pulse{50%{transform:scale(1.04)}}
+.env .bk{position:absolute;inset:0;background:#f4b9a0;border-radius:10px}
+.env .pp{position:absolute;left:14px;right:14px;top:10px;height:96px;background:#fffdf8;border-radius:6px;transition:transform .8s;display:flex;align-items:center;justify-content:center;font-size:1.7rem;color:#e58aa5}
+.env .fr{position:absolute;inset:0;background:#ffd0bb;border-radius:10px;clip-path:polygon(0 0,50% 52%,100% 0,100% 100%,0 100%)}
+.env .fl{position:absolute;left:0;right:0;top:0;height:68px;background:#f7c2ab;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s;border-radius:10px 10px 0 0;z-index:2}
+.env .sl{position:absolute;left:50%;top:44px;margin-left:-13px;font-size:26px;z-index:3;transition:opacity .3s}
+.env.open{animation:none}.env.open .fl{transform:rotateX(180deg);z-index:0}.env.open .pp{transform:translateY(-42px)}.env.open .sl{opacity:0}
+.btns{display:flex;flex-direction:column;gap:11px;width:100%;margin-top:8px}
+.btn{font:inherit;font-weight:700;color:var(--btnink);border:0;border-radius:99px;padding:15px 22px;cursor:pointer;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible,#char:focus-visible,#secret:focus-visible,.env:focus-visible,.mini:focus-visible,.bb:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.b1{background:var(--peach)}.b2{background:var(--lav)}.b3{background:var(--mint)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:18px 20px;width:100%;margin-top:6px;animation:rise .5s ease both}
+.card .e{font-size:2.4rem;line-height:1.1;margin-bottom:6px}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.mini{font:inherit;font-weight:700;border:0;border-radius:99px;padding:10px 18px;background:var(--lav);color:var(--btnink);cursor:pointer;text-decoration:none;display:inline-block}
+.mini.q{background:transparent;color:var(--soft);text-decoration:underline}
+.mini.go{background:var(--peach)}
+.tk{border:2px dashed #e9a98f;border-radius:16px;padding:14px;background:var(--card);position:relative}
+.stamp{position:absolute;right:10px;top:10px;border:3px solid #e58aa5;color:#e58aa5;border-radius:8px;padding:0 8px;font-weight:700;transform:rotate(-10deg);opacity:0;transition:opacity .3s}
+.tk.done .stamp{opacity:1}
+.bbs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0}
+.bb{width:54px;height:54px;border-radius:50%;border:0;font-size:22px;cursor:pointer;background:radial-gradient(circle at 35% 30%,#fff,var(--lav));animation:bob 3s ease-in-out infinite;transition:transform .25s,opacity .25s}
+.bb.pop{transform:scale(1.6);opacity:0;pointer-events:none}
+.pbar{height:10px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:10px}
+.pbar i{display:block;height:100%;width:0;background:#f4a0b8}
+.fstar{position:fixed;bottom:-30px;z-index:1;pointer-events:none;opacity:.55;animation:float linear infinite}
+@keyframes float{to{transform:translate(var(--sw),-115vh) rotate(180deg);opacity:0}}
+.tr{position:fixed;z-index:40;pointer-events:none;font-size:14px;animation:tr .8s forwards}
+@keyframes tr{to{transform:translateY(20px) scale(.3);opacity:0}}
+.shoot{position:fixed;z-index:50;pointer-events:none;width:110px;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#ffcf6b);animation:sh 1.2s ease-out forwards}
+@keyframes sh{from{transform:translate(0,0) rotate(22deg);opacity:1}to{transform:translate(420px,180px) rotate(22deg);opacity:0}}
+#secret{position:fixed;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:3;background:none;border:0;font-size:14px;opacity:.28;cursor:pointer;padding:10px;color:var(--ink)}
+#secret:hover{opacity:.7}
+#secret.w{animation:wig .4s}
+@keyframes wig{25%{transform:rotate(-25deg) scale(1.3)}75%{transform:rotate(25deg) scale(1.3)}}
+#sky{position:fixed;inset:0;z-index:20;background:linear-gradient(#1d2a5b,#4b4a8f 55%,#c59bb8);opacity:0;visibility:hidden;transition:opacity 1s,visibility 1s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#fff3e8;text-align:center;padding:env(safe-area-inset-top,0px) 24px env(safe-area-inset-bottom,0px);overflow:hidden}
+#sky.on{opacity:1;visibility:visible}
+.s{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:tw 4s ease-in-out infinite}
+@keyframes tw{50%{opacity:.15;transform:scale(.6)}}
+.moon{position:absolute;top:12%;right:14%;width:58px;height:58px;border-radius:50%;background:#fff6dc;box-shadow:0 0 40px 12px rgba(255,246,220,.35)}
+.cl{position:absolute;height:26px;width:120px;border-radius:99px;background:rgba(255,255,255,.14);filter:blur(2px);animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-160px)}to{transform:translateX(110vw)}}
+.orb{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff6dc,#ffd6c4 60%,#e9b6d4);box-shadow:0 0 50px 14px rgba(255,214,196,.3);animation:br 10s ease-in-out infinite;position:relative}
+@keyframes br{0%,100%{transform:scale(.7)}40%{transform:scale(1.15)}}
+#sky p{margin:0;position:relative;font-size:1.25rem}
+#sky .soft{opacity:.85;font-size:1rem;min-height:3em;transition:opacity .8s}
+#sky .mini{position:relative;background:rgba(255,255,255,.2);color:#fff3e8;margin-top:6px}
+#egg{position:fixed;inset:0;z-index:30;background:rgba(40,25,55,.55);display:none;align-items:center;justify-content:center;padding:24px}
+#egg.on{display:flex}
+#egg .card{max-width:340px;color:var(--ink)}
+.fall{position:fixed;top:-40px;z-index:31;pointer-events:none;font-size:26px;animation:fall 2.8s ease-in forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(360deg)}}
+.hrt{position:fixed;z-index:45;pointer-events:none;font-size:24px;animation:up 1.6s ease-out forwards}
+@keyframes up{to{transform:translate(var(--dx),-160px) scale(1.4);opacity:0}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none;opacity:1}.wave,#char,.s,.cl,.orb,.fstar,.env,.bb{animation:none}.fall,.hrt,.shoot,.tr{animation-duration:.01s}#sky,.env .pp,.env .fl{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <div class="rise" style="--d:.1s"><div id="bub" aria-live="polite">Hi hi!</div></div>
+  <div class="rise" style="--d:.2s">
+  <svg id="char" viewBox="0 0 160 160" role="button" tabindex="0" aria-label="Say hi back">
+    <ellipse cx="80" cy="150" rx="40" ry="6" fill="#000" opacity=".1"/>
+    <circle cx="48" cy="38" r="15" fill="#ffc5ad"/><circle cx="112" cy="38" r="15" fill="#ffc5ad"/>
+    <circle cx="48" cy="38" r="8" fill="#ffa9b8" opacity=".7"/><circle cx="112" cy="38" r="8" fill="#ffa9b8" opacity=".7"/>
+    <ellipse cx="80" cy="92" rx="52" ry="50" fill="#ffd6c4"/>
+    <ellipse cx="62" cy="62" rx="16" ry="8" fill="#fff" opacity=".4" transform="rotate(-25 62 62)"/>
+    <ellipse cx="38" cy="108" rx="11" ry="12" fill="#ffc5ad" transform="rotate(14 38 108)"/>
+    <g class="wave"><ellipse cx="128" cy="86" rx="10" ry="15" fill="#ffc5ad" transform="rotate(-18 128 86)"/></g>
+    <circle cx="62" cy="86" r="5" fill="#5a4a5e"/><circle cx="98" cy="86" r="5" fill="#5a4a5e"/>
+    <circle cx="64" cy="84" r="1.7" fill="#fff"/><circle cx="100" cy="84" r="1.7" fill="#fff"/>
+    <ellipse cx="50" cy="100" rx="9" ry="6" fill="#ff9fb2" opacity=".6"/><ellipse cx="110" cy="100" rx="9" ry="6" fill="#ff9fb2" opacity=".6"/>
+    <path d="M73 102q7 7 14 0" stroke="#5a4a5e" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <ellipse cx="62" cy="140" rx="11" ry="6" fill="#ffc5ad"/><ellipse cx="98" cy="140" rx="11" ry="6" fill="#ffc5ad"/>
+  </svg></div>
+  <h1 class="rise" style="--d:.5s" id="hi">Hi, Mayuu</h1>
+  <p class="sub rise" style="--d:.7s" id="sub"></p>
+  <p class="tiny rise" style="--d:.8s" id="cd"></p>
+  <div class="rise" style="--d:1s;width:100%">
+    <button class="env" id="env" aria-label="Open today’s note"><div class="bk"></div><div class="pp">💌</div><div class="fr"></div><div class="fl"></div><div class="sl">💗</div></button>
+    <p class="tiny" id="envl">A note for you today. Tap to open.</p>
+  </div>
+  <div class="btns">
+    <button class="btn b1 rise" style="--d:1.3s" id="bSmile">Make me smile</button>
+    <button class="btn b2 rise" style="--d:1.45s" id="bTalk">I feel like talking</button>
+    <button class="btn b3 rise" style="--d:1.6s" id="bMoment">I need a little moment</button>
+  </div>
+  <div id="out" style="width:100%" aria-live="polite"></div>
+</main>
+
+<button id="secret" aria-label="a tiny star">✦</button>
+
+<div id="sky" role="dialog" aria-label="Calming sky" aria-hidden="true">
+  <div class="moon"></div>
+  <div class="orb"></div>
+  <p id="bw">breathe in</p>
+  <p class="soft" id="sl">Nothing needs fixing right now.</p>
+  <button class="mini" id="skyX">Come back when you’re ready</button>
+</div>
+
+<div id="egg" role="dialog" aria-label="A secret">
+  <div class="card">
+    <div class="e">🌟</div>
+    <p style="font-weight:700;margin:0 0 6px;font-size:1.2rem">You found the secret star!</p>
+    <p style="margin:0 0 4px">Achievement unlocked: <b>Professional Star Finder</b>.</p>
+    <p style="color:var(--soft);margin:0">Reward: one imaginary hug, redeemable any time.</p>
+    <div class="row"><button class="mini go" id="redeem">Redeem hug</button><button class="mini q" id="eggX">Close</button></div>
+  </div>
+</div>
+
+<script>
+/* ---- Make it yours ---- */
+var NAME="Mayuu";
+var PHONE="+918866590277";
+var MEET="";             // next time you meet, e.g. "2026-12-20"
+var SPECIAL=[];          // special days, e.g. [["02-14","Happy Valentine’s Day"],["06-05","Happy birthday"]]
+var NOTES=[
+"I was thinking about you before I even picked up my phone today.",
+"You don’t have to be at your best for me to be proud of you.",
+"Your laugh is the sound I’d keep if I could only keep one.",
+"Some people make a room warmer just by walking in. You do that to my whole day.",
+"Whatever is heavy today, you don’t have to carry it alone. Hand me a corner.",
+"I love how much you care about the small things. It’s one of my favourite things about you.",
+"You’re allowed to be a work in progress. I’m a fan of the work and the progress.",
+"If today is hard, just do the next small thing. I’m cheering for you loudly from here.",
+"Out of everything on my phone, you’re still my favourite notification.",
+"Thank you for being exactly who you are.",
+"I hope someone is kind to you today. If nobody is, I’m sending extra.",
+"You make ordinary plans feel like adventures.",
+"I notice more than I say. Today I’m saying: you’re wonderful.",
+"Rest counts as progress too. Take it without guilt.",
+"Distance is just the long way around to the next hug.",
+"You’re my favourite person to tell good news to.",
+"I believe in you, and I’m not even slightly biased. (Okay, slightly.)",
+"Your softness isn’t weakness. It’s the thing I admire most.",
+"Drink some water, then come back and let me tell you how much you matter to me.",
+"Tired, silly, stressed or glowing, every version of you is one I’m lucky to know.",
+"However the day went, I’m on your side."
+];
+var SURPRISES=[
+["🐱","Cats have a slow blink that means “I trust you.” Try one at the next cat you see."],
+["🦦","Sea otters hold hands while they sleep so they don’t drift apart."],
+["🧁","One imaginary cupcake, just for you. No calories, extra sprinkles."],
+["💧","Water check. A few sips for future you."],
+["🫖","Tiny quest: make something warm to drink and take the first sip slowly."],
+["📮","A pretend letter just arrived. It says: “{n} is doing better than she thinks.”"],
+["🐧","Penguins give a perfect pebble to someone they like. Here you go: 🪨 It’s yours."],
+["🤏","Tiny dare: roll your shoulders back and unclench your jaw."],
+["🐝","Bees do a little wiggle dance to tell friends where the flowers are. Wiggle for me?"],
+["🎵","Hum one bar of any song you like. That’s the whole task."],
+["🍀","A small wish for {n}: may something little and lovely happen before bedtime."],
+["🌙","Even the moon takes a few days off from being full."],
+["🌈","Today’s lucky colour is {c}. Spot one, or wear one."],
+["🐙","Octopuses have three hearts. You’d still have the kindest."],
+["☁️","Look at the sky for ten seconds. It does something different every time."],
+["🍓","If today were a snack, it would be strawberries: small, sweet, underrated."],
+["🪴","Plants grow best with light, water and a little attention. So do you. Today you get all three."],
+["🧸","Plot twist: you’re somebody’s favourite person. Mine."]
+];
+var COUPONS=[
+"One movie night over video call. You pick, no complaints.",
+"One whole rant where I only listen. No advice unless you ask.",
+"One voice note, any time you want it.",
+"One song picked just for you.",
+"One “tell me about your day” hour, phone down, full attention.",
+"You choose dinner. No arguing, no “I don’t mind.”",
+"One “you’re right.” (Terms apply. 😌)"
+];
+var BUB=["You’re easy to love.","Your laugh makes my day.","You’re braver than you feel.","Thanks for being you.","You deserve soft things.","I’m proud of you.","You’re doing better than you think."];
+var COLORS=["lavender","butter yellow","peach","mint","sky blue","strawberry pink","lilac"];
+var CHAT=["Hehe!","Hi hi!","That tickles ✨","Mayuu!!","You’re here! 💛","Boop!","Hello again!","Yay!"];
+var SKYL=["Nothing needs fixing right now.","You’re allowed to rest.","Let your shoulders drop.","You don’t have to be okay this minute.","This feeling will pass. You’re safe here.","You’re doing enough."];
+var GREET={m:["Good morning, sunshine.","A fresh little day, just for you.","Morning. Take it slow today.","Good morning. I’m glad you’re here."],a:["Hope the day is treating you kindly.","A little afternoon hello.","Pause for a second. You’re doing great.","Hi you. Hope something nice happened today."],e:["Evening, softly. You can put things down now.","Welcome back. How was your day?","The day’s nearly done. Be proud of it.","Cosy hours. Get comfortable."],n:["Up late? Be gentle with yourself tonight.","Quiet hours. You’re not alone.","It’s late. You did enough today.","Hello, night owl."]};
+/* ----------------------- */
+var $=function(i){return document.getElementById(i)},out=$('out'),lastS=-1,lastK='',skyT,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+var now=new Date(),hr=now.getHours(),pool=hr<5?GREET.n:hr<12?GREET.m:hr<17?GREET.a:hr<22?GREET.e:GREET.n;
+$('hi').textContent='Hi, '+NAME;$('sub').textContent=pick(pool);
+if(MEET){var dd=Math.ceil((new Date(MEET+'T00:00:00')-now)/864e5);if(dd>0)$('cd').textContent=dd+(dd===1?' day':' days')+' until I see you 💛'}
+var mmdd=('0'+(now.getMonth()+1)).slice(-2)+'-'+('0'+now.getDate()).slice(-2),special=null;
+SPECIAL.forEach(function(s){if(s[0]===mmdd)special=s[1]});
+if(special){$('sub').textContent=special+' ✨';}
+
+/* floating stars + occasional shooting star */
+(function(){var c=["#ffd98e","#dccff7","#ffc5ad","#cdeedd","#ffb7c9"];
+ for(var i=0;i<14;i++){var s=document.createElement('span');s.className='fstar';s.textContent=i%3?'✦':'★';
+  s.style.left=(Math.random()*96)+'vw';s.style.fontSize=(10+Math.random()*14)+'px';s.style.color=c[i%5];
+  s.style.setProperty('--sw',(Math.random()*60-30)+'px');s.style.animationDuration=(16+Math.random()*18)+'s';s.style.animationDelay=(-Math.random()*30)+'s';document.body.appendChild(s)}})();
+function shoot(){if(reduce)return;var s=document.createElement('div');s.className='shoot';s.style.left=(Math.random()*40)+'vw';s.style.top=(4+Math.random()*22)+'vh';document.body.appendChild(s);setTimeout(function(){s.remove()},1300)}
+setInterval(shoot,13000);setTimeout(shoot,2500);
+
+/* sparkle trail under her finger */
+var lt=0;document.addEventListener('pointermove',function(e){if(reduce)return;var t=Date.now();if(t-lt<70)return;lt=t;var s=document.createElement('div');s.className='tr';s.textContent=pick(['✦','✧','·']);s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';s.style.color=pick(['#ffd98e','#f4a0b8','#b9a6f0']);document.body.appendChild(s);setTimeout(function(){s.remove()},850)});
+
+function burst(e,n,list){var r=e.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/3;
+ for(var k=0;k<(n||8);k++){var h=document.createElement('div');h.className='hrt';h.textContent=pick(list);
+  h.style.left=(x+Math.random()*80-40)+'px';h.style.top=y+'px';h.style.setProperty('--dx',(Math.random()*90-45)+'px');h.style.animationDelay=(k*60)+'ms';
+  document.body.appendChild(h);setTimeout(function(el){el.remove()},2300,h)}}
+function rain(n){var r=["⭐","🌟","✨","💛","🌸","💗"];for(var k=0;k<n;k++){var f=document.createElement('div');f.className='fall';f.textContent=r[k%6];f.style.left=(Math.random()*96)+'vw';f.style.animationDelay=(Math.random()*1.4)+'s';document.body.appendChild(f);setTimeout(function(e){e.remove()},4500,f)}}
+function hop(){var c=$('char');c.classList.remove('hop');void c.offsetWidth;c.classList.add('hop');setTimeout(function(){c.classList.remove('hop')},520)}
+var bt;function say(t){var b=$('bub');b.textContent=t;b.classList.add('on');clearTimeout(bt);bt=setTimeout(function(){b.classList.remove('on')},1800)}
+$('char').onclick=function(){hop();say(pick(CHAT));burst($('char'),5,["✨","💛","🌸"])};
+$('char').onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();$('char').onclick()}};
+setTimeout(function(){say(special?'Today is special! 🎉':'Hi hi!');if(special)rain(30)},900);
+
+/* today’s note: random note every click */
+$('env').onclick=function(){var e=$('env');e.classList.add('open');$('envl').textContent='Your note';
+ setTimeout(function(){var note=pick(NOTES);out.innerHTML='<div class="card"><div class="e">💌</div><p style="margin:0" id="nt"></p><p class="tiny" style="margin-top:10px">Tap again for another beautiful note 💖</p></div>';$('nt').textContent=note;burst($('env'),9,["💗","✨","🌸"]);out.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'})},650)};
+
+/* make me smile: a mix of surprises */
+function textS(){var i;do{i=Math.floor(Math.random()*SURPRISES.length)}while(i===lastS);lastS=i;var s=SURPRISES[i];
+ card('<div class="e">'+s[0]+'</div><p style="margin:0" id="st"></p>');$('st').textContent=s[1].replace(/\{n\}/g,NAME).replace(/\{c\}/g,pick(COLORS));hop();burst($('char'),6,["✨","💗","⭐","🌸"])}
+function card(h){out.innerHTML='<div class="card">'+h+'<div class="row"><button class="mini" id="mo">Another one</button></div></div>';$('mo').onclick=surprise}
+function wishS(){card('<div class="e">⭐</div><p style="margin:0 0 8px">Make a wish. Hold it in your head, then tap the star.</p><button class="mini go" id="ws">Send my wish</button>');
+ $('ws').onclick=function(){shoot();setTimeout(shoot,300);this.parentNode.querySelector('p').textContent='Wish sent to the universe. I’d love to hear it sometime. 🌠';this.remove()}}
+function bubS(){var h='<p style="margin:0 0 6px">Pop a bubble.</p><div class="bbs">';for(var i=0;i<5;i++)h+='<button class="bb" style="animation-delay:'+(i*.4)+'s" aria-label="Bubble">🫧</button>';card(h+'</div><p id="bm" style="margin:6px 0 0;min-height:1.6em;font-weight:700"></p>');
+ document.querySelectorAll('.bb').forEach(function(b){b.onclick=function(){b.classList.add('pop');$('bm').textContent=pick(BUB);burst(b,4,["💗","✨"])}})}
+function hugS(){card('<div class="e">🫂</div><p style="margin:0" id="hm">Press and hold for a pocket hug.</p><div class="pbar"><i id="hp"></i></div><div class="row"><button class="mini go" id="hb" style="touch-action:none;user-select:none">Hold to hug</button></div>');
+ var iv,p=0,done=false;function stop(){clearInterval(iv);$('char').classList.remove('sq');if(!done){p=0;$('hp').style.width='0';$('hm').textContent='Hold a little longer…'}}
+ $('hb').onpointerdown=function(e){e.preventDefault();done=false;p=0;$('char').classList.add('sq');$('hm').textContent='Hugging…';iv=setInterval(function(){p+=4;$('hp').style.width=p+'%';if(p>=100){done=true;clearInterval(iv);$('char').classList.remove('sq');$('hm').textContent='Hug delivered. Felt that? 🫂';if(navigator.vibrate)try{navigator.vibrate([60,40,60])}catch(x){}burst($('char'),12,["🫂","💗","✨"])}},100)};
+ $('hb').onpointerup=stop;$('hb').onpointerleave=stop;$('hb').onpointercancel=stop;$('hb').oncontextmenu=function(e){e.preventDefault()}}
+function couponS(){var t=pick(COUPONS);card('<div class="tk" id="tk"><div class="stamp">REDEEMED</div><div class="e">🎟️</div><p style="margin:0 0 4px;font-weight:700">Good for one:</p><p style="margin:0" id="ct"></p></div><div class="row"><button class="mini go" id="rd">Redeem it</button></div><p class="tiny" style="margin-top:8px">Show me this screen and I’ll make it happen.</p>');
+ $('ct').textContent=t;$('rd').onclick=function(){$('tk').classList.add('done');this.remove();burst($('tk'),10,["🎉","💗","✨"])}}
+var KINDS={text:textS,text2:textS,text3:textS,wish:wishS,bubbles:bubS,hug:hugS,coupon:couponS};
+function surprise(){var ks=Object.keys(KINDS),k;do{k=pick(ks)}while(k===lastK&&k.indexOf('text')<0);lastK=k;KINDS[k]()}
+$('bSmile').onclick=surprise;
+
+/* I feel like talking: one gentle step before the dialer */
+$('bTalk').onclick=function(){
+ out.innerHTML='<div class="card"><div class="e">💬</div><p style="margin:0 0 4px;font-weight:700">I’m here. No pressure.</p><p style="margin:0;color:var(--soft)">If you feel like talking, I’d love that. Nothing happens unless you tap.</p><div class="row"><a class="mini go" href="tel:'+PHONE+'">Call me</a><a class="mini" href="sms:'+PHONE+'">Text me</a><button class="mini q" id="nn">Not right now</button></div><p class="tiny" style="margin-top:10px">My number: '+PHONE+'</p></div>';
+ $('nn').onclick=function(){out.innerHTML='<div class="card"><p style="margin:0">That’s completely okay. The door stays open. 🌷</p></div>'}};
+
+/* a little moment: calming sky */
+(function(){var sk=$('sky');
+ for(var i=0;i<60;i++){var s=document.createElement('i');s.className='s';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*70+'%';s.style.animationDelay=(-Math.random()*4)+'s';s.style.animationDuration=(3+Math.random()*4)+'s';sk.insertBefore(s,sk.firstChild)}
+ for(var j=0;j<3;j++){var c=document.createElement('div');c.className='cl';c.style.top=(18+j*22)+'%';c.style.animationDuration=(60+j*25)+'s';c.style.animationDelay=(-j*22)+'s';c.style.width=(110+j*40)+'px';sk.insertBefore(c,sk.firstChild)}
+ var iv,li=0;function close(){sk.classList.remove('on');sk.setAttribute('aria-hidden','true');clearInterval(iv);clearInterval(skyT);out.innerHTML='<div class="card"><p style="margin:0">Welcome back. I’m proud of you for pausing. 🌙</p></div>';$('bMoment').focus()}
+ $('bMoment').onclick=function(){sk.classList.add('on');sk.setAttribute('aria-hidden','false');var b=$('bw'),l=$('sl'),p=0;b.textContent='breathe in';li=0;l.textContent=SKYL[0];
+  iv=setInterval(function(){p=(p+1)%10;if(p===0)b.textContent='breathe in';if(p===4)b.textContent='breathe out'},1000);
+  skyT=setInterval(function(){l.style.opacity=0;setTimeout(function(){li=(li+1)%SKYL.length;l.textContent=SKYL[li];l.style.opacity=.85},800);if(li%2)shoot()},10000);$('skyX').focus()};
+ $('skyX').onclick=close;document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(sk.classList.contains('on'))close();else $('egg').classList.remove('on')}})})();
+
+/* secret star: five taps */
+var taps=0;
+$('secret').onclick=function(){var s=this;s.classList.remove('w');void s.offsetWidth;s.classList.add('w');taps++;
+ if(taps>=5){taps=0;rain(36);$('egg').classList.add('on');$('eggX').focus()}};
+$('redeem').onclick=function(){this.textContent='Hug redeemed. Balance: unlimited 🫂';burst(this,12,["🫂","💗","✨"])};
+$('eggX').onclick=function(){$('egg').classList.remove('on')};
+</script>
+</body>
+</html>
